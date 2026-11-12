@@ -1,0 +1,4 @@
+name: forja-selvagem
+
+include:
+  - infra/docker/docker-compose.yml
