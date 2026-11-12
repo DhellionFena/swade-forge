@@ -481,12 +481,3 @@ docs(business-rules): cross-reference RN-BR in feature specs
 - Spec 07: Storybook (aprovado — markdown apenas), Radix UI (aprovado), Tailwind (aprovado), nomenclatura (aprovado — genérica), animação de rolagem (aprovado — fade + bounce), regressão visual (pendente).
 
 ---
-
-**Aguardo aprovação da Spec 08.** Pontos críticos que precisam da sua bênção antes de seguir:
-
-1. **Curinga ganha Bene** — depende da Spec 11 (iniciativa). Se a iniciativa estiver no MVP, o sistema concede Bene automaticamente; senão, é manual.
-2. **Habilidades raciais e Vantagens com efeito em rolagem** (Visão no Escuro, Esquiva, Bloquear) — no MVP ficam como **texto informativo** e o mestre aplica manualmente. Confirma?
-3. **Fórmulas de Aparar/Resistência** com `floor(rank / 2)` — confirma?
-4. **Regras de Ambientação** — ficam fora do MVP. Confirma?
-
-Se aprovar, sigo para a **Spec 09 — Infraestrutura**.
