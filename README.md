@@ -6,6 +6,27 @@ Feito para mesas pequenas e para uso pessoal. É open source e vive na web gratu
 
 ---
 
+## Quickstart
+
+Pré-requisitos: Node 24+, npm 11+ e Docker com Compose.
+
+```bash
+cp .env.example .env
+npm install
+docker compose up -d --build
+curl http://localhost:3001/health/ready
+```
+
+Abra [http://localhost:3000](http://localhost:3000). Para desenvolvimento com hot reload,
+suba só o banco e rode o monorepo: `docker compose up -d postgres && npm run dev`.
+Se a porta 5432 já estiver ocupada, use `POSTGRES_PORT=5433 docker compose up -d --build`.
+
+Os templates de ambiente dos apps ficam em `apps/backend/env.example` e
+`apps/web/env.example` (copie para `.env` ao rodar fora do Docker). Progresso, decisões
+pendentes e instruções de retomada ficam em [`docs/development/`](./docs/development/).
+
+---
+
 ## Por que este projeto existe
 
 Mestrar Savage Worlds é rápido, divertido e furioso. Mas manter tudo organizado fora da mesa — fichas, NPCs, anotações de campanha, histórico de rolagens — costuma virar um monte de planilhas, cadernos e PDFs espalhados.
@@ -83,9 +104,12 @@ Se você chegou agora e quer entender o projeto do zero, o caminho é ler `specs
 
 ## Status
 
-**Fase atual: especificação concluída.** Nenhuma linha de código de produção foi escrita ainda. O próximo passo é implementar as fases da Spec 10, começando pela fundação (monorepo, Docker, banco, CI) e depois autenticação.
+**Fase atual: Fase 0 (Fundação) implementada.** O monorepo, o backend NestJS, o frontend
+Next.js, o PostgreSQL via Docker, os health checks e o CI já estão de pé. A próxima fase é
+autenticação: login, gestão de usuários e sessão de ponta a ponta.
 
-Acompanhe o andamento pelo roadmap em `specs/10-mvp-roadmap.md`.
+Acompanhe o andamento em [`docs/development/PROGRESS.md`](./docs/development/PROGRESS.md) e
+o roadmap em `specs/10-mvp-roadmap.md`.
 
 ---
 
