@@ -1,0 +1,24 @@
+{
+  "name": "@forja/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tipos e contratos compartilhados do Forja Selvagem",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"@forja/shared: no tests yet\""
+  },
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}

@@ -1,0 +1,21 @@
+* text=auto eol=lf
+
+# Specs are authored with CRLF; keep their existing line endings.
+specs/** text eol=crlf
+
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+*.zip binary
