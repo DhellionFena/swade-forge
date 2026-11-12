@@ -1,0 +1,167 @@
+:root {
+  color-scheme: dark;
+
+  /* Colors — dark theme (default) */
+  --color-bg-base: #12121a;
+  --color-bg-surface: #1a1a24;
+  --color-bg-elevated: #222230;
+  --color-bg-hover: #2a2a3a;
+  --color-bg-input: #222230;
+  --color-text-primary: #e6e6f0;
+  --color-text-secondary: #8a8aa0;
+  --color-text-disabled: #5a5a70;
+  --color-border: #2e2e3e;
+  --color-border-strong: #4a4a5e;
+  --color-accent: #e0b040;
+  --color-accent-hover: #f0c050;
+  --color-accent-dim: #a08030;
+  --color-success: #4a9a4a;
+  --color-danger: #c04040;
+  --color-warning: #d09030;
+  --color-info: #4a7aaa;
+  --color-focus-ring: #e0b040;
+
+  /* Semantic roles */
+  --color-role-admin: #e0b040;
+  --color-role-master: #4a7aaa;
+  --color-role-player: #4a9a4a;
+  --color-rank-novato: #8a8aa0;
+  --color-rank-experiente: #4a7aaa;
+  --color-rank-veterano: #8a4aaa;
+  --color-rank-heroico: #e0b040;
+  --color-rank-lendario: #c04040;
+  --color-wc: #e0b040;
+  --color-extra: #8a8aa0;
+  --color-critical: #c04040;
+  --color-ace: #e0b040;
+
+  /* Typography */
+  --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* Spacing — 4px scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-focus: 0 0 0 2px var(--color-focus-ring);
+
+  /* Motion */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-decelerate: cubic-bezier(0, 0, 0, 1);
+
+  /* Stacking */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+.light {
+  color-scheme: light;
+
+  --color-bg-base: #f0f0f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #fafafa;
+  --color-bg-hover: #f0f0f8;
+  --color-bg-input: #ffffff;
+  --color-text-primary: #222233;
+  --color-text-secondary: #666680;
+  --color-text-disabled: #a0a0b0;
+  --color-border: #d0d0e0;
+  --color-border-strong: #a0a0b0;
+  --color-accent: #a08030;
+  --color-accent-hover: #b09040;
+  --color-accent-dim: #806020;
+  --color-success: #3a7a3a;
+  --color-danger: #a03030;
+  --color-warning: #b07020;
+  --color-info: #3a5a8a;
+  --color-focus-ring: #a08030;
+
+  --color-role-admin: #a08030;
+  --color-role-master: #3a5a8a;
+  --color-role-player: #3a7a3a;
+  --color-rank-novato: #666680;
+  --color-rank-experiente: #3a5a8a;
+  --color-rank-veterano: #6a3a8a;
+  --color-rank-heroico: #a08030;
+  --color-rank-lendario: #a03030;
+  --color-wc: #a08030;
+  --color-extra: #666680;
+  --color-critical: #a03030;
+  --color-ace: #a08030;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) {
+    color-scheme: light;
+
+    --color-bg-base: #f0f0f5;
+    --color-bg-surface: #ffffff;
+    --color-bg-elevated: #fafafa;
+    --color-bg-hover: #f0f0f8;
+    --color-bg-input: #ffffff;
+    --color-text-primary: #222233;
+    --color-text-secondary: #666680;
+    --color-text-disabled: #a0a0b0;
+    --color-border: #d0d0e0;
+    --color-border-strong: #a0a0b0;
+    --color-accent: #a08030;
+    --color-accent-hover: #b09040;
+    --color-accent-dim: #806020;
+    --color-success: #3a7a3a;
+    --color-danger: #a03030;
+    --color-warning: #b07020;
+    --color-info: #3a5a8a;
+    --color-focus-ring: #a08030;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
