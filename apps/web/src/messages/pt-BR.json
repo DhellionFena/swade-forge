@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "Forja Selvagem",
+    "tagline": "Savage Worlds, sem planilhas"
+  },
+  "home": {
+    "eyebrow": "Savage Worlds Adventure Edition",
+    "title": "A campanha inteira em um só lugar.",
+    "subtitle": "O Forja Selvagem tira fichas, NPCs, eventos e rolagens do meio das planilhas e coloca tudo na mesa. O sistema aplica as regras; o mestre continua no comando da história."
+  },
+  "common": {
+    "loading": "Carregando",
+    "retry": "Tentar novamente",
+    "cancel": "Cancelar",
+    "save": "Salvar"
+  }
+}
