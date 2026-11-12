@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savage Worlds — Escudo do Mestre</title>
+    <style>
+      :root {
+        --bg: #12121a;
+        --bg-section: #1a1a24;
+        --bg-card: #222230;
+        --bg-card-hover: #2a2a3a;
+        --text: #e6e6f0;
+        --text-muted: #8a8aa0;
+        --accent: #e0b040;
+        --accent-dim: #a08030;
+        --red: #c04040;
+        --green: #4a9a4a;
+        --blue: #4a7aaa;
+        --border: #2e2e3e;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          system-ui,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 13px;
+        line-height: 1.45;
+        min-height: 100vh;
+      }
+      body.light {
+        --bg: #f0f0f5;
+        --bg-section: #ffffff;
+        --bg-card: #fafafa;
+        --bg-card-hover: #f0f0f8;
+        --text: #222233;
+        --text-muted: #666680;
+        --border: #d0d0e0;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-section);
+        border-bottom: 2px solid var(--accent);
+        padding: 10px 16px;
+        box-shadow: var(--shadow);
+      }
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+      h1 {
+        font-size: 17px;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+        min-width: 280px;
+      }
+      #search {
+        flex: 1;
+        padding: 8px 12px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 13px;
+        outline: none;
+      }
+      #search:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(224, 176, 64, 0.25);
+      }
+      button {
+        padding: 8px 12px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 14px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--accent);
+      }
+      .hint {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 4px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 900px) {
+        main {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (min-width: 1400px) {
+        main {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+      .section {
+        background: var(--bg-section);
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        break-inside: avoid;
+      }
+      .section h2 {
+        font-size: 15px;
+        color: var(--accent);
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 700;
+      }
+      .card {
+        background: var(--bg-card);
+        border-radius: 6px;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+        border-left: 3px solid var(--accent-dim);
+        transition: background 0.15s;
+      }
+      .card:hover {
+        background: var(--bg-card-hover);
+      }
+      .card h3 {
+        font-size: 13px;
+        color: var(--accent);
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+      .card p,
+      .card ul,
+      .card ol {
+        margin-bottom: 4px;
+      }
+      .card ul,
+      .card ol {
+        padding-left: 18px;
+      }
+      .card li {
+        margin-bottom: 2px;
+      }
+      .card strong {
+        color: #f0d080;
+      }
+      body.light .card strong {
+        color: #8a6a20;
+      }
+      .card em {
+        color: var(--text-muted);
+        font-style: normal;
+        font-size: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        margin: 6px 0;
+      }
+      th,
+      td {
+        padding: 3px 6px;
+        border: 1px solid var(--border);
+        text-align: left;
+      }
+      th {
+        background: var(--bg-card-hover);
+        color: var(--accent);
+        font-weight: 600;
+      }
+      td.center,
+      th.center {
+        text-align: center;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .page-ref {
+        color: var(--text-muted);
+        font-size: 10px;
+        font-style: italic;
+        float: right;
+      }
+      .no-results {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-muted);
+        font-size: 16px;
+        grid-column: 1 / -1;
+      }
+      @media print {
+        header .controls,
+        .hint {
+          display: none;
+        }
+        header {
+          position: static;
+        }
+        body {
+          background: white;
+          color: black;
+        }
+        .section {
+          break-inside: avoid;
+        }
+        main {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>⚔️ Savage Worlds — Escudo do Mestre</h1>
+        <div class="controls">
+          <input
+            type="search"
+            id="search"
+            placeholder="🔍 Buscar regra... (cobertura, ferimento, benes, wild die, cura, medo)"
+          />
+          <button id="theme-toggle" title="Alternar tema claro/escuro">
+            🌓
+          </button>
+          <button id="print-btn" title="Imprimir">🖨️</button>
+        </div>
+      </div>
+      <div class="hint">
+        Atalhos: <strong>/</strong> foca a busca · <strong>Esc</strong> limpa a
+        busca · 🌓 tema · 🖨️ imprimir
+      </div>
+    </header>
+
+    <main id="content">
+      <!-- ============ ROLAGENS ============ -->
+      <section class="section">
+        <h2>🎲 Rolagens Básicas</h2>
+
+        <div class="card">
+          <h3>Teste Padrão <span class="page-ref">pág. 102</span></h3>
+          <p>
+            Role o dado da perícia/atributo.
+            <strong>Sucesso = 4+</strong> (Dificuldade padrão).
+          </p>
+          <p>
+            <em>Modificadores:</em> fácil +2, difícil –2, muito difícil –4. O
+            Mestre decide.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Dado Selvagem <span class="page-ref">pág. 102</span></h3>
+          <p>
+            <strong>Cartas Selvagens</strong> (jogadores, vilões, monstros
+            únicos) rolam <strong>1d6 extra</strong> e escolhem o
+            <strong>maior</strong> resultado entre o dado de Característica e o
+            Dado Selvagem.
+          </p>
+          <p><strong>Extras</strong> rolam apenas 1 dado.</p>
+          <p>
+            <em>1 Dado Selvagem por ação</em>, mesmo com múltiplos dados
+            (Frenesi, CdT alta).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            Ases (Explosão de Dados) <span class="page-ref">pág. 102</span>
+          </h3>
+          <p>
+            Se rolar o <strong>valor máximo</strong> no dado (6 em d6, 8 em
+            d8…), role novamente e <strong>some</strong>. Vale para
+            Característica e Dano.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ampliações (Raises) <span class="page-ref">pág. 102</span></h3>
+          <p>
+            Cada <strong>4 pontos acima da Dificuldade</strong> = 1 Ampliação.
+          </p>
+          <p>
+            Ampliação no ataque: <strong>+1d6 de dano</strong> (pág. 109).
+            Outras ampliações: efeito extra a critério do Mestre.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Falha Crítica <span class="page-ref">pág. 103</span></h3>
+          <p>
+            <strong>Carta Selvagem:</strong> 1 no dado de Característica
+            <strong>E</strong> 1 no Dado Selvagem ao mesmo tempo.
+          </p>
+          <p>
+            <strong>Extra:</strong> rolou 1; role 1d6 — se sair 1, é Falha
+            Crítica.
+          </p>
+          <p>
+            <strong>Não pode ser rerrolada</strong>, nem com Benes (exceto regra
+            Pura Sorte, pág. 167).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Sem Perícia <span class="page-ref">pág. 103</span></h3>
+          <p>
+            Role <strong>d4 – 2</strong> (+ Dado Selvagem se Carta Selvagem).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Rolagem Resistida <span class="page-ref">pág. 102</span></h3>
+          <p>
+            Atacante rola primeiro (precisa ≥ 4). Defensor rola depois e precisa
+            <strong>igualar ou superar</strong>. O vencedor usa o total do
+            oponente para Ampliações.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Rolagem em Grupo <span class="page-ref">pág. 103</span></h3>
+          <p>
+            Para um grupo de Extras: role 1 dado de Característica + 1 Dado
+            Selvagem e use o maior como total do grupo.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Estatísticas Derivadas <span class="page-ref">pág. 11</span></h3>
+          <p>
+            <strong>Aparar</strong> = 2 + metade de Lutar (arred. baixo). Sem
+            Lutar = 2.
+          </p>
+          <p>
+            <strong>Resistência</strong> = 2 + metade de Vigor + Armadura
+            (tronco).
+          </p>
+          <p>
+            <strong>Movimentação</strong> padrão = 6 quadros (1 quadro = 2 m).
+          </p>
+          <p>
+            <em>Valores acima de d12:</em> adicione metade do modificador fixo
+            (d12+2 → +1).
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ INICIATIVA ============ -->
+      <section class="section">
+        <h2>🃏 Iniciativa & Turno</h2>
+
+        <div class="card">
+          <h3>Cartas de Ação <span class="page-ref">pág. 106</span></h3>
+          <p>
+            Saque 1 carta por Carta Selvagem/grupo a cada rodada. Baralho padrão
+            com curingas.
+          </p>
+          <p><strong>Ordem:</strong> Curingas primeiro, depois Ás → 2.</p>
+          <p><strong>Empate:</strong> ♠ &gt; ♥ &gt; ♦ &gt; ♣.</p>
+        </div>
+
+        <div class="card">
+          <h3>Curinga <span class="page-ref">pág. 106</span></h3>
+          <p>
+            <strong>+2 em TODAS as rolagens de Característica e dano</strong> na
+            rodada.
+          </p>
+          <p>
+            Quando um <strong>jogador</strong> saca Curinga:
+            <strong>todos os jogadores ganham 1 Bene</strong>.
+          </p>
+          <p>
+            Quando um <strong>vilão</strong> saca Curinga: Mestre ganha 1 Bene +
+            1 por Carta Selvagem inimiga.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Rodada e Turno <span class="page-ref">pág. 106</span></h3>
+          <p>
+            <strong>Rodada</strong> = ~6 segundos. <strong>Turno</strong> = sua
+            vez na ordem de iniciativa.
+          </p>
+          <p>
+            Você pode se mover e realizar <strong>1 ação</strong> sem
+            penalidade.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ações Múltiplas <span class="page-ref">pág. 113</span></h3>
+          <table>
+            <tr>
+              <th>Ações</th>
+              <th>Penalidade</th>
+            </tr>
+            <tr>
+              <td class="center">1</td>
+              <td class="center">0</td>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td class="center">–2 em todas</td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td class="center">–4 em todas</td>
+            </tr>
+          </table>
+          <p>
+            Declare todas as ações antes de rolar. Movimento pode ser dividido
+            entre ações.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ações Livres <span class="page-ref">pág. 107</span></h3>
+          <p>
+            Falar 1–2 frases, mover, largar item, sacar item (até 2), cair
+            prostrado. Várias por turno (bom senso).
+          </p>
+          <p>
+            <em>Recuperar-se de Abalado:</em> ação livre no início do turno (1
+            tentativa).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Aguardar <span class="page-ref">pág. 114</span></h3>
+          <p>
+            Descarte sua carta e aja a qualquer momento da rodada. Pode
+            interromper ações com rolagem resistida de Atletismo.
+          </p>
+          <p><em>Perde Aguardar</em> se ficar Abalado ou Atordoado.</p>
+        </div>
+      </section>
+
+      <!-- ============ ATAQUES ============ -->
+      <section class="section">
+        <h2>⚔️ Ataques</h2>
+
+        <div class="card">
+          <h3>Corpo a Corpo <span class="page-ref">pág. 108</span></h3>
+          <p>
+            Role <strong>Lutar</strong> vs <strong>Aparar</strong> do alvo.
+            Acertou? Role dano.
+          </p>
+          <p><strong>Dano</strong> = Força + dado da arma.</p>
+        </div>
+
+        <div class="card">
+          <h3>A Distância <span class="page-ref">pág. 108</span></h3>
+          <p>
+            Role <strong>Atirar</strong> (ou Atletismo para arremesso) vs Dif.
+            4.
+          </p>
+          <table>
+            <tr>
+              <th>Distância</th>
+              <th>Penalidade</th>
+            </tr>
+            <tr>
+              <td>Curta</td>
+              <td class="center">0</td>
+            </tr>
+            <tr>
+              <td>Média</td>
+              <td class="center">–2</td>
+            </tr>
+            <tr>
+              <td>Longa</td>
+              <td class="center">–4</td>
+            </tr>
+            <tr>
+              <td>Extrema (4× Longa)</td>
+              <td class="center">–8 (só Mirando)</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Cadência de Tiro (CdT) <span class="page-ref">pág. 108</span></h3>
+          <p>
+            Nº de tiros por ação. CdT 3 = role 3 dados de Atirar + 1 Dado
+            Selvagem, distribua os acertos.
+          </p>
+          <p>Pode disparar menos que a CdT máxima.</p>
+        </div>
+
+        <div class="card">
+          <h3>Recuo <span class="page-ref">pág. 126</span></h3>
+          <p>
+            CdT 2+ na mesma ação: <strong>–2</strong> em todas as rolagens de
+            Atirar daquela ação.
+          </p>
+          <p>Não acumula entre ações.</p>
+        </div>
+
+        <div class="card">
+          <h3>Rajada de Três Balas <span class="page-ref">pág. 77</span></h3>
+          <p>
+            <strong>+1</strong> em Atirar e dano. Gasta 3 balas. CdT tratada
+            como 1 nesse modo.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ataque Selvagem <span class="page-ref">pág. 115</span></h3>
+          <p>
+            <strong>+2</strong> em Lutar e dano. Fica
+            <strong>Vulnerável</strong> até o fim do próximo turno.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Agrupar (Gang Up) <span class="page-ref">pág. 113</span></h3>
+          <p>
+            +1 por inimigo adjacente extra (máx <strong>+4</strong>). Aliados
+            adjacentes cancelam 1 ponto cada.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Mirar <span class="page-ref">pág. 124</span></h3>
+          <p>
+            Turno inteiro mirando: <strong>+2</strong> na próxima rolagem
+            <strong>OU</strong> ignora até <strong>4 pontos</strong> de
+            penalidades (Distância, Cobertura, etc.).
+          </p>
+          <p>Não pode se mover. Usar na 1ª ação do próximo turno.</p>
+        </div>
+
+        <div class="card">
+          <h3>Cobertura <span class="page-ref">pág. 118</span></h3>
+          <table>
+            <tr>
+              <th>Cobertura</th>
+              <th>Pen.</th>
+            </tr>
+            <tr>
+              <td>Leve (25%)</td>
+              <td class="center">–1</td>
+            </tr>
+            <tr>
+              <td>Média (50%)</td>
+              <td class="center">–2</td>
+            </tr>
+            <tr>
+              <td>Boa (75%)</td>
+              <td class="center">–4</td>
+            </tr>
+            <tr>
+              <td>Excelente (90%)</td>
+              <td class="center">–6</td>
+            </tr>
+          </table>
+          <p>
+            <em>Errar por causa da cobertura:</em> o obstáculo funciona como
+            armadura para quem está atrás.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Iluminação <span class="page-ref">pág. 124</span></h3>
+          <table>
+            <tr>
+              <th>Condição</th>
+              <th>Pen.</th>
+            </tr>
+            <tr>
+              <td>Penumbra</td>
+              <td class="center">–2</td>
+            </tr>
+            <tr>
+              <td>Escuridão</td>
+              <td class="center">–4</td>
+            </tr>
+            <tr>
+              <td>Escuro como Breu</td>
+              <td class="center">–6</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Ataques Localizados <span class="page-ref">pág. 117</span></h3>
+          <table>
+            <tr>
+              <th>Local</th>
+              <th>Pen.</th>
+              <th>Efeito</th>
+            </tr>
+            <tr>
+              <td>Mão</td>
+              <td class="center">–4</td>
+              <td>Pode desarmar</td>
+            </tr>
+            <tr>
+              <td>Cabeça/Vitais</td>
+              <td class="center">–4</td>
+              <td>+4 dano</td>
+            </tr>
+            <tr>
+              <td>Membro</td>
+              <td class="center">–2</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Item</td>
+              <td class="center">varia</td>
+              <td>Ver escala</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Outros Modificadores</h3>
+          <ul>
+            <li>
+              <strong>Prostrado:</strong> –4 em ataques a distância de 3+
+              quadros; –4 de dano em área contra ele.
+            </li>
+            <li>
+              <strong>Plataforma Instável:</strong> –2 (cavalo, veículo em
+              movimento).
+            </li>
+            <li>
+              <strong>Duas Armas:</strong> +1 em Lutar se o inimigo tem 1
+              arma/desarmado (não contra Armas Naturais).
+            </li>
+            <li>
+              <strong>Defensor Desarmado:</strong> +2 em Lutar contra quem não
+              tem arma/escudo.
+            </li>
+            <li>
+              <strong>Escopeta:</strong> +2 em Atirar, 3d6/2d6/1d6
+              (Curta/Média/Longa).
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ DANO ============ -->
+      <section class="section">
+        <h2>💥 Aplicação de Dano</h2>
+
+        <div class="card">
+          <h3>Tabela de Dano <span class="page-ref">pág. 110</span></h3>
+          <table>
+            <tr>
+              <th>Dano vs Resist.</th>
+              <th>Não Abalado</th>
+              <th>Já Abalado</th>
+            </tr>
+            <tr>
+              <td>0–3 (Sucesso)</td>
+              <td>Abalado</td>
+              <td>1 Fer. + Abalado</td>
+            </tr>
+            <tr>
+              <td>4–7 (1 Amp.)</td>
+              <td>1 Fer. + Abalado</td>
+              <td>2 Fer. + Abalado</td>
+            </tr>
+            <tr>
+              <td>8–11 (2 Amp.)</td>
+              <td>2 Fer. + Abalado</td>
+              <td>3 Fer. + Abalado</td>
+            </tr>
+            <tr>
+              <td>12–15 (3 Amp.)</td>
+              <td>3 Fer. + Abalado</td>
+              <td>3 Fer. + Abalado</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Limite de Ferimentos</h3>
+          <ul>
+            <li><strong>Extra comum:</strong> 1 Fer. → Incapacitado.</li>
+            <li><strong>Extra Resiliente:</strong> 1; 2º o derruba.</li>
+            <li><strong>Extra Muito Resiliente:</strong> 2; 3º o derruba.</li>
+            <li><strong>Carta Selvagem:</strong> 3 Fer.; 4º → Incapacitado.</li>
+            <li><strong>Duro de Matar:</strong> 4 Fer.</li>
+            <li><strong>Muito Duro de Matar:</strong> 5 Fer.</li>
+            <li>
+              <strong>Grande:</strong> +1 Fer. <strong>Enorme:</strong> +2.
+              <strong>Colossal:</strong> +3.
+            </li>
+          </ul>
+          <p><em>Penalidade máxima por Ferimentos: –3.</em></p>
+        </div>
+
+        <div class="card">
+          <h3>Bônus de Dano <span class="page-ref">pág. 109</span></h3>
+          <p>
+            Ampliação no ataque = <strong>+1d6</strong> no dano. O dado extra
+            pode gerar Ás.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            Rolagem de Absorção (Soak) <span class="page-ref">pág. 111</span>
+          </h3>
+          <p><strong>1 Bene</strong> → role <strong>Vigor</strong>.</p>
+          <p>Cada sucesso e ampliação <strong>reduz 1 Ferimento</strong>.</p>
+          <p>Se absorver todos, remove Abalado também.</p>
+          <p>
+            <strong>Máx 1 vez por ataque.</strong> Pode gastar Benes para
+            rerrolar.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Dano Não-Letal <span class="page-ref">pág. 119</span></h3>
+          <p>
+            Punhos ou armas contundentes. Armas cortantes com lado chato: –1 em
+            Lutar.
+          </p>
+          <p>
+            Incapacitado = <strong>nocauteado por 1d6 horas</strong> em vez de
+            morrendo.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Finalização <span class="page-ref">pág. 122</span></h3>
+          <p>
+            Alvo indefeso/desprevenido: <strong>+4 no ataque e dano</strong>.
+          </p>
+          <p>
+            Se o dano deixar Abalado → teste de Vigor (–2 se na cabeça) ou
+            <strong>nocauteado</strong>.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Golpe de Misericórdia <span class="page-ref">pág. 124</span></h3>
+          <p>
+            Alvo completamente indefeso + arma letal + 1 ação =
+            <strong>morto</strong> (a critério do Mestre).
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ ESTADOS ============ -->
+      <section class="section">
+        <h2>🩸 Estados</h2>
+
+        <div class="card">
+          <h3>Abalado <span class="page-ref">pág. 110</span></h3>
+          <p>
+            Só ações livres. No início do turno, role
+            <strong>Espírito</strong> (ação livre) para recuperar.
+          </p>
+          <p>
+            <strong>Gastar 1 Bene</strong> remove Abalado a qualquer momento.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ferimento <span class="page-ref">pág. 110</span></h3>
+          <p>
+            –1 em todas as rolagens de Característica e –1 Movimentação por
+            Ferimento (máx –3).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Incapacitado <span class="page-ref">pág. 110</span></h3>
+          <p>
+            Fora de combate.
+            <strong>Role Vigor + Tabela de Lesões</strong> (pág. 111).
+          </p>
+          <p><em>Falha Crítica</em> = lesão permanente + Sangrando.</p>
+          <p><em>Falha</em> = lesão temporária + Sangrando.</p>
+          <p><em>Sucesso</em> = lesão temporária.</p>
+          <p><em>Ampliação</em> = lesão some em 24h.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sangrando <span class="page-ref">pág. 111</span></h3>
+          <p>No início de cada turno: role <strong>Vigor</strong>.</p>
+          <p>
+            <em>Falha:</em> morre. <em>Sucesso:</em> sobrevive mais 1 turno.
+            <em>Ampliação:</em> estabiliza.
+          </p>
+          <p>
+            Outro personagem pode estabilizar com <strong>Curar</strong> (1
+            ação).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Atordoado <span class="page-ref">pág. 117</span></h3>
+          <p>Distraído, prostrado, sem ações. Finalização contra ele.</p>
+          <p>
+            No início do turno: role <strong>Vigor</strong>. Sucesso = recupera
+            (Distraído + Vulnerável); Ampliação = sem efeitos.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Distraído / Vulnerável <span class="page-ref">pág. 120</span></h3>
+          <p>
+            <strong>Distraído:</strong> –2 em todas as rolagens de
+            Característica.
+          </p>
+          <p><strong>Vulnerável:</strong> +2 para quem ataca ele.</p>
+          <p>Duram até o fim do próximo turno.</p>
+        </div>
+
+        <div class="card">
+          <h3>Preso / Enredado <span class="page-ref">pág. 124</span></h3>
+          <p><strong>Enredado:</strong> não se move + Distraído.</p>
+          <p>
+            <strong>Preso:</strong> não se move + Distraído + Vulnerável + sem
+            ações físicas.
+          </p>
+          <p>Libertar-se: ação de Atletismo ou Força (–2).</p>
+        </div>
+
+        <div class="card">
+          <h3>Fadiga <span class="page-ref">pág. 122</span></h3>
+          <p><strong>Fatigado:</strong> –1 em todas as rolagens.</p>
+          <p><strong>Exausto:</strong> –2 em todas as rolagens.</p>
+          <p><strong>Incapacitado:</strong> próximo nível.</p>
+          <p>Recupera 1 nível por hora (ou conforme a fonte).</p>
+        </div>
+
+        <div class="card">
+          <h3>Prostrado <span class="page-ref">pág. 125</span></h3>
+          <p>
+            –4 em ataques a distância de 3+ quadros; –4 de dano em área.
+            Levantar = ação livre.
+          </p>
+        </div>
+      </section>
+      <!-- ============ MANOBRAS ============ -->
+      <section class="section">
+        <h2>🥋 Manobras de Combate</h2>
+
+        <div class="card">
+          <h3>Suporte <span class="page-ref">pág. 126</span></h3>
+          <p>
+            Role perícia relevante. Aliado ganha <strong>+1</strong> (ou
+            <strong>+2</strong> com ampliação) na próxima rolagem. Máx +4.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Desafio <span class="page-ref">pág. 119</span></h3>
+          <p>
+            Role perícia vs atributo associado do alvo. Vitória: alvo fica
+            <strong>Distraído</strong> OU <strong>Vulnerável</strong>.
+            Ampliação: também Abalado ou efeito extra.
+          </p>
+          <p><em>Repetição</em> perde eficácia (Mestre aplica penalidade).</p>
+        </div>
+
+        <div class="card">
+          <h3>Agarrar <span class="page-ref">pág. 113</span></h3>
+          <p>
+            Atletismo vs Atletismo. Vitória: <strong>Enredado</strong>.
+            Ampliação: <strong>Preso</strong>.
+          </p>
+          <p>Diferença de Escala: atacante subtrai a diferença.</p>
+          <p><strong>Amassar:</strong> Força vs Força, dano = Força.</p>
+        </div>
+
+        <div class="card">
+          <h3>Empurrar <span class="page-ref">pág. 121</span></h3>
+          <p>
+            Força vs Força. Vitória: empurra 1 quadro (2 com ampliação). Alvo
+            faz Atletismo (–2 se ampliação) ou cai prostrado.
+          </p>
+          <p>Correndo 2+ quadros antes: +2.</p>
+        </div>
+
+        <div class="card">
+          <h3>Desarmar <span class="page-ref">pág. 120</span></h3>
+          <p>
+            Ataque localizado na arma/mão. Se acertar o item: role dano normal.
+            Defensor faz Força vs dano ou larga o item.
+          </p>
+          <p>
+            Se acertar o portador e causar Ferimento/Abalado: Força –2 (membro)
+            ou –4 (mão) ou larga.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Defender <span class="page-ref">pág. 119</span></h3>
+          <p>
+            Turno inteiro: <strong>+4 Aparar</strong>. Pode mover, não pode
+            correr nem fazer Ações Múltiplas.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Retirada <span class="page-ref">pág. 126</span></h3>
+          <p>
+            Sair de corpo a corpo: todos os adjacentes não Abalados/Atordoados
+            ganham <strong>Ataque Livre</strong> contra você.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Finta <span class="page-ref">pág. 119</span></h3>
+          <p>
+            Desafio com Lutar: alvo resiste com <strong>Astúcia</strong> em vez
+            de Agilidade.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Fogo de Supressão <span class="page-ref">pág. 123</span></h3>
+          <p>
+            Modelo Médio de Explosão. Role 1 dado de Atirar. Sucesso =
+            Distraído. Ampliação = atingido (dano).
+          </p>
+          <p>
+            Máx de alvos atingidos = CdT da arma. Gasta 3× munição. Sempre sofre
+            Recuo.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ataques de Área <span class="page-ref">pág. 116</span></h3>
+          <p>
+            Ignoram Esquiva e bônus de alvos específicos. Role dano separado
+            para cada vítima.
+          </p>
+          <p>
+            <strong>Desvio:</strong> 1d6 quadros (arremesso) ou 2d6 (disparo).
+            Multiplique pela distância (×2 Média, ×3 Longa, ×4 Extrema).
+          </p>
+          <p>Role 1d12 (relógio) para direção.</p>
+        </div>
+
+        <div class="card">
+          <h3>Espectadores Inocentes <span class="page-ref">pág. 121</span></h3>
+          <p>
+            Ao errar com arma de fogo: cada 1 no dado de Atirar atinge um alvo
+            adjacente ao original.
+          </p>
+          <p>
+            <strong>CdT 2+ ou escopeta:</strong> 1 <strong>ou</strong> 2 acertam
+            espectador.
+          </p>
+          <p>Dado Selvagem nunca acerta espectador (exceto escopeta).</p>
+        </div>
+      </section>
+
+      <!-- ============ BENES ============ -->
+      <section class="section">
+        <h2>🪙 Benes</h2>
+
+        <div class="card">
+          <h3>Quantidade <span class="page-ref">pág. 103</span></h3>
+          <p><strong>Jogadores:</strong> 3 por sessão.</p>
+          <p><strong>Mestre:</strong> 1 por jogador no início da sessão.</p>
+          <p>
+            <strong>Cartas Selvagens NPC:</strong> 2 cada (ou mais com Sorte).
+          </p>
+          <p>Não acumulam entre sessões.</p>
+        </div>
+
+        <div class="card">
+          <h3>Usos <span class="page-ref">pág. 104</span></h3>
+          <ul>
+            <li>
+              <strong>Rerrolar</strong> uma Característica (mantém o melhor;
+              Falha Crítica encerra).
+            </li>
+            <li><strong>Remover Abalado</strong> (a qualquer momento).</li>
+            <li>
+              <strong>Rolagem de Absorção</strong> (Vigor para reduzir
+              Ferimentos).
+            </li>
+            <li>
+              <strong>Sacar nova Carta de Ação</strong> (após todas sacadas).
+            </li>
+            <li>
+              <strong>Recuperar 5 Pontos de Poder</strong> (com Antecedente
+              Arcano).
+            </li>
+            <li>
+              <strong>Influenciar a História</strong> (a critério do Mestre).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Como Ganhar Benes <span class="page-ref">pág. 104</span></h3>
+          <ul>
+            <li>Ação inteligente / interpretação.</li>
+            <li>Interpretar Complicações.</li>
+            <li>Heroísmo / boa história / risada.</li>
+            <li>Curinga sacado por jogador (todos ganham 1).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Benes do Mestre <span class="page-ref">pág. 104</span></h3>
+          <p>
+            1 por jogador no início. Vilão Carta Selvagem sacando Curinga = +1
+            Bene na reserva + 1 por Carta Selvagem inimiga.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ CURA ============ -->
+      <section class="section">
+        <h2>💚 Cura</h2>
+
+        <div class="card">
+          <h3>Cura com Perícia <span class="page-ref">pág. 112</span></h3>
+          <p>10 min por nível de Ferimento. –1 sem kit.</p>
+          <p>Sucesso: remove 1 Ferimento. Ampliação: 2.</p>
+          <p>
+            <strong>Hora de Ouro:</strong> só é possível curar Ferimentos até 1
+            hora após sofridos. Depois: só cura natural ou poder
+            <em>cura maior</em>.
+          </p>
+          <p>Falha Crítica: aumenta 1 Ferimento.</p>
+        </div>
+
+        <div class="card">
+          <h3>Cura Natural <span class="page-ref">pág. 112</span></h3>
+          <p>
+            Teste de Vigor a cada <strong>5 dias</strong>. Sucesso: 1 Ferimento.
+            Ampliação: 2.
+          </p>
+          <p>Falha Crítica: +1 Ferimento (pode levar à morte).</p>
+        </div>
+
+        <div class="card">
+          <h3>Estabilizar <span class="page-ref">pág. 112</span></h3>
+          <p>Perícia Curar (1 ação). Sucesso para Sangrando.</p>
+        </div>
+
+        <div class="card">
+          <h3>Incapacitação <span class="page-ref">pág. 112</span></h3>
+          <p>
+            Curar pelo menos 1 Ferimento remove o estado Incapacitado e recupera
+            a consciência.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ TABELAS ============ -->
+      <section class="section">
+        <h2>📊 Tabelas Rápidas</h2>
+
+        <div class="card">
+          <h3>Tabela de Medo (1d20) <span class="page-ref">pág. 140</span></h3>
+          <table>
+            <tr>
+              <th>d20</th>
+              <th>Efeito</th>
+            </tr>
+            <tr>
+              <td class="center">1</td>
+              <td>Surto de Adrenalina (age como Curinga)</td>
+            </tr>
+            <tr>
+              <td class="center">2–3</td>
+              <td>Distraído</td>
+            </tr>
+            <tr>
+              <td class="center">4–5</td>
+              <td>Vulnerável</td>
+            </tr>
+            <tr>
+              <td class="center">6–7</td>
+              <td>Abalado</td>
+            </tr>
+            <tr>
+              <td class="center">8–9</td>
+              <td>A Marca do Medo (Atordoado)</td>
+            </tr>
+            <tr>
+              <td class="center">10–11</td>
+              <td>Aterrorizado (Hesitante)</td>
+            </tr>
+            <tr>
+              <td class="center">12–13</td>
+              <td>Apavorado (foge + Abalado)</td>
+            </tr>
+            <tr>
+              <td class="center">14–15</td>
+              <td>Fobia Menor</td>
+            </tr>
+            <tr>
+              <td class="center">16–17</td>
+              <td>Fobia Maior</td>
+            </tr>
+            <tr>
+              <td class="center">18–20</td>
+              <td>Ataque Cardíaco (Vigor –2)</td>
+            </tr>
+          </table>
+          <p>
+            <em
+              >Adicione a penalidade de Medo da criatura (positivo) ao d20.</em
+            >
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Tabela de Lesões (2d6) <span class="page-ref">pág. 111</span></h3>
+          <table>
+            <tr>
+              <th>2d6</th>
+              <th>Lesão</th>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Improvisáveis (permanente)</td>
+            </tr>
+            <tr>
+              <td class="center">3–4</td>
+              <td>Braço</td>
+            </tr>
+            <tr>
+              <td class="center">5–9</td>
+              <td>Visceras (1–2 Agi; 3–4 Vig; 5–6 For)</td>
+            </tr>
+            <tr>
+              <td class="center">10–11</td>
+              <td>Perna (Lento Menor/Maior)</td>
+            </tr>
+            <tr>
+              <td class="center">12</td>
+              <td>Cabeça (1–3 Feio; 4–5 Um Olho; 6 Dano Cerebral)</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Reação Inicial (2d6) <span class="page-ref">pág. 39</span></h3>
+          <table>
+            <tr>
+              <th>2d6</th>
+              <th>Reação</th>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Hostil</td>
+            </tr>
+            <tr>
+              <td class="center">3</td>
+              <td>Antipático</td>
+            </tr>
+            <tr>
+              <td class="center">4–5</td>
+              <td>Não Cooperativo</td>
+            </tr>
+            <tr>
+              <td class="center">6–8</td>
+              <td>Neutro</td>
+            </tr>
+            <tr>
+              <td class="center">9–10</td>
+              <td>Cooperativo</td>
+            </tr>
+            <tr>
+              <td class="center">11</td>
+              <td>Amigável</td>
+            </tr>
+            <tr>
+              <td class="center">12</td>
+              <td>Prestativo</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Fora de Controle (2d6) <span class="page-ref">pág. 156</span></h3>
+          <table>
+            <tr>
+              <th>2d6</th>
+              <th>Efeito</th>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Colisão Maior (d4 Fer. + Acerto Crítico)</td>
+            </tr>
+            <tr>
+              <td class="center">3–4</td>
+              <td>Colisão Menor (1 Fer. + Acerto Crítico)</td>
+            </tr>
+            <tr>
+              <td class="center">5–9</td>
+              <td>Distraído</td>
+            </tr>
+            <tr>
+              <td class="center">10–11</td>
+              <td>Vulnerável</td>
+            </tr>
+            <tr>
+              <td class="center">12</td>
+              <td>Defeito (Acerto Crítico)</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>
+            Acerto Crítico de Veículo (2d6)
+            <span class="page-ref">pág. 156</span>
+          </h3>
+          <table>
+            <tr>
+              <th>2d6</th>
+              <th>Efeito</th>
+            </tr>
+            <tr>
+              <td class="center">2</td>
+              <td>Arranhões</td>
+            </tr>
+            <tr>
+              <td class="center">3–4</td>
+              <td>Direção/Tração (–1 Manob.)</td>
+            </tr>
+            <tr>
+              <td class="center">5</td>
+              <td>Locomoção (–10% Vel.)</td>
+            </tr>
+            <tr>
+              <td class="center">6–8</td>
+              <td>Chassi</td>
+            </tr>
+            <tr>
+              <td class="center">9–10</td>
+              <td>Tripulação</td>
+            </tr>
+            <tr>
+              <td class="center">11</td>
+              <td>Arma</td>
+            </tr>
+            <tr>
+              <td class="center">12</td>
+              <td>Sistema</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>
+            Modificadores de Escala <span class="page-ref">pág. 127</span>
+          </h3>
+          <table>
+            <tr>
+              <th>Mod.</th>
+              <th>Escala</th>
+            </tr>
+            <tr>
+              <td class="center">–6</td>
+              <td>Minúsculo (rato)</td>
+            </tr>
+            <tr>
+              <td class="center">–4</td>
+              <td>Muito Pequeno (gato)</td>
+            </tr>
+            <tr>
+              <td class="center">–2</td>
+              <td>Pequeno (criança)</td>
+            </tr>
+            <tr>
+              <td class="center">0</td>
+              <td>Normal (humano)</td>
+            </tr>
+            <tr>
+              <td class="center">+2</td>
+              <td>Grande (hipopótamo)</td>
+            </tr>
+            <tr>
+              <td class="center">+4</td>
+              <td>Enorme (dragão)</td>
+            </tr>
+            <tr>
+              <td class="center">+6</td>
+              <td>Colossal (prédio)</td>
+            </tr>
+          </table>
+          <p>Criatura menor soma a diferença nos ataques; maior subtrai.</p>
+        </div>
+
+        <div class="card">
+          <h3>Tamanho <span class="page-ref">pág. 216</span></h3>
+          <table>
+            <tr>
+              <th>Tam.</th>
+              <th>Exemplo</th>
+              <th>Fer. Extras</th>
+            </tr>
+            <tr>
+              <td class="center">–1</td>
+              <td>Criança, goblin</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="center">0</td>
+              <td>Humano</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="center">+1</td>
+              <td>Orc, leão</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="center">+2</td>
+              <td>Cavalo, ogro</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="center">+3</td>
+              <td>Touro</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="center">+4 a +7</td>
+              <td>Grande</td>
+              <td>+1</td>
+            </tr>
+            <tr>
+              <td class="center">+8 a +11</td>
+              <td>Enorme</td>
+              <td>+2</td>
+            </tr>
+            <tr>
+              <td class="center">+12+</td>
+              <td>Colossal</td>
+              <td>+3</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ FERRAMENTAS NARRATIVAS ============ -->
+      <section class="section">
+        <h2>🎭 Ferramentas Narrativas</h2>
+
+        <div class="card">
+          <h3>Batalhas em Massa <span class="page-ref">pág. 133</span></h3>
+          <p>Marcadores de Força Militar = tamanho relativo do exército.</p>
+          <p>
+            A cada rodada: rolagem resistida de
+            <strong>Conhecimento Batalha</strong> dos comandantes.
+          </p>
+          <p>
+            Vitória: derrotado perde 2 marcadores. Vitória apertada: vencedor
+            perde 1, derrotado 2. Empate: ambos perdem 1.
+          </p>
+          <p>
+            Personagens podem fazer <strong>Suporte</strong> (role perícia) para
+            dar +1 ao comandante ou rolar na tabela de Efeitos da Batalha (2d6).
+          </p>
+          <p>
+            <strong>Moral:</strong> ao perder marcador, role Espírito (–1 por
+            marcador perdido). Falha = debandada.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Conflito Social <span class="page-ref">pág. 135</span></h3>
+          <p>
+            3 rodadas de argumentação. <strong>Persuadir</strong> vs Espírito
+            (ou Persuadir do rival).
+          </p>
+          <table>
+            <tr>
+              <th>Marcadores</th>
+              <th>Resultado</th>
+            </tr>
+            <tr>
+              <td class="center">0</td>
+              <td>Negado / réu absolvido</td>
+            </tr>
+            <tr>
+              <td class="center">1–3</td>
+              <td>Mínimo de suporte</td>
+            </tr>
+            <tr>
+              <td class="center">4–5</td>
+              <td>Convencido com condições</td>
+            </tr>
+            <tr>
+              <td class="center">6+</td>
+              <td>Ávido para ajudar / pena máxima</td>
+            </tr>
+          </table>
+          <p>Julgamentos: acusador precisa de ≥ 3 marcadores para condenar.</p>
+        </div>
+
+        <div class="card">
+          <h3>Tarefas Dramáticas <span class="page-ref">pág. 170</span></h3>
+          <p>
+            Acumule <strong>Marcadores de Tarefa</strong> antes do tempo acabar.
+          </p>
+          <table>
+            <tr>
+              <th>Tipo</th>
+              <th>Marcadores</th>
+              <th>Rodadas</th>
+            </tr>
+            <tr>
+              <td>Desafiadora</td>
+              <td class="center">4</td>
+              <td class="center">3</td>
+            </tr>
+            <tr>
+              <td>Difícil</td>
+              <td class="center">6</td>
+              <td class="center">4</td>
+            </tr>
+            <tr>
+              <td>Complexa</td>
+              <td class="center">8</td>
+              <td class="center">5</td>
+            </tr>
+          </table>
+          <p>Sucesso/ampliação = +1 marcador. Falha = 0. Falha Crítica = –1.</p>
+          <p>
+            <strong>Contratempo (Paus):</strong> –2 extra. Se falhar durante
+            Contratempo = tarefa falha!
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Encontros Rápidos <span class="page-ref">pág. 137</span></h3>
+          <p>
+            1 rolagem de perícia relevante por jogador. Sucessos &gt; inimigos =
+            grupo vence.
+          </p>
+          <p>
+            <strong>Perigoso:</strong> falha = 1 Ferimento (d4 com Falha
+            Crítica). Ampliação = ileso.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Interlúdios <span class="page-ref">pág. 139</span></h3>
+          <p>
+            Saque uma carta. Naipe define as opções (Paus/Espadas/Copas/Ouros ×
+            Pausa/Histórico/Jornada).
+          </p>
+          <p>
+            <strong>Participou? Ganha 1 Bene.</strong> Curinga: todos ganham
+            Bene extra e escolhem naipe.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Perseguições <span class="page-ref">pág. 148</span></h3>
+          <p>
+            Cartas de Perseguição em linha.
+            <strong>Incremento de Distância:</strong> Pé/Veículo 5,
+            Aeronave/Navio 25, Espaçonave 50.
+          </p>
+          <p>
+            <strong>Manobras:</strong> Mudar de Posição (ação livre), Evadir,
+            Fugir, Forçar, Manter Firme, Abalroar, Abordar.
+          </p>
+          <p>
+            <strong>Contratempo:</strong> naipe da carta define resultado (Paus
+            = Falha Crítica, Copas/Ouros = Batido, Espadas = Falha Crítica,
+            Curinga = +2).
+          </p>
+          <p>
+            Veículo com dano ≥ Resistência: motorista rola manobra ou Fora de
+            Controle. Personagem Abalado/Atordoado/Ferido = Batido.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Rede de Contatos <span class="page-ref">pág. 160</span></h3>
+          <p>
+            <strong>Persuadir</strong> (simpático) ou
+            <strong>Intimidar</strong> (não simpático) para conseguir
+            favores/informação.
+          </p>
+          <p>
+            Várias horas de esforço. Sucesso = obtém. Ampliação = mais/rápido.
+            Falha Crítica = consequências.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Viagem <span class="page-ref">pág. 174</span></h3>
+          <table>
+            <tr>
+              <th>Transporte</th>
+              <th>km/dia</th>
+            </tr>
+            <tr>
+              <td>A pé</td>
+              <td class="center">24</td>
+            </tr>
+            <tr>
+              <td>Cavalo</td>
+              <td class="center">30</td>
+            </tr>
+            <tr>
+              <td>Carro antigo</td>
+              <td class="center">200</td>
+            </tr>
+            <tr>
+              <td>Carro moderno</td>
+              <td class="center">400</td>
+            </tr>
+            <tr>
+              <td>Barco a vela</td>
+              <td class="center">30</td>
+            </tr>
+            <tr>
+              <td>Trem a vapor</td>
+              <td class="center">60</td>
+            </tr>
+            <tr>
+              <td>Jato comercial</td>
+              <td class="center">4.000</td>
+            </tr>
+          </table>
+          <p>
+            <strong>Encontros:</strong> saque 1 carta/dia (áreas perigosas).
+            Figura+ = encontro. Naipe: ♠ inimigos, ♥ estranhos, ♦ tesouro, ♣
+            obstáculo.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ PERIGOS ============ -->
+      <section class="section">
+        <h2>☠️ Perigos Rápidos</h2>
+
+        <div class="card">
+          <h3>Afogamento <span class="page-ref">pág. 142</span></h3>
+          <p>
+            Prender respiração: 2 + dado de Vigor rodadas (metade se pego de
+            surpresa).
+          </p>
+          <p>Incapacitado: morre em rodadas = Vigor.</p>
+        </div>
+
+        <div class="card">
+          <h3>Calor <span class="page-ref">pág. 142</span></h3>
+          <p>
+            Acima de 32°C: Vigor a cada 4h. Falha = 1 Fadiga (só recupera
+            resfriando).
+          </p>
+          <p>Penalidade extra por atividade física.</p>
+        </div>
+
+        <div class="card">
+          <h3>Frio <span class="page-ref">pág. 146</span></h3>
+          <p>
+            Abaixo de 0°C: Vigor a cada 4h. –2 por cada 5°C abaixo (máx –4).
+          </p>
+          <p>Roupas leves: –2. Roupas de inverno: +2. Traje avançado: +4.</p>
+        </div>
+
+        <div class="card">
+          <h3>Fome <span class="page-ref">pág. 145</span></h3>
+          <p>Após 24h sem comida: Vigor. –2 se nada comeu. Falha = 1 Fadiga.</p>
+          <p>Incapacitado morre em 3d6 horas.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sede <span class="page-ref">pág. 146</span></h3>
+          <p>
+            Após 1 dia sem água: Vigor a cada 8h (4h em calor). –2 se menos da
+            metade, –4 se nada. Falha = 1 Fadiga.
+          </p>
+          <p>Incapacitado morre em 2d6 horas.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sono <span class="page-ref">pág. 147</span></h3>
+          <p>
+            Sem 6h de sono: Vigor –2 cumulativo a cada 24h (máx –4). Falha = 1
+            Fadiga.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Queda <span class="page-ref">pág. 146</span></h3>
+          <p>Dano: <strong>1d6 +1 por 2 quadros</strong> (máx 10d6+10).</p>
+          <p>
+            Água (Atletismo): sucesso = metade; ampliação = nenhum (até 10
+            quadros).
+          </p>
+          <p>Neve macia: –1 por 30 cm.</p>
+        </div>
+
+        <div class="card">
+          <h3>Fogo <span class="page-ref">pág. 144</span></h3>
+          <p>
+            Pegar fogo: 1d6 (6 = pega). Inflamável: 4–6. Muito inflamável: 2–6.
+          </p>
+          <p>Dano típico: 1d6, 2d6, 3d6 (intensidade).</p>
+          <p>Apagar: Atletismo (ação).</p>
+        </div>
+
+        <div class="card">
+          <h3>Eletricidade <span class="page-ref">pág. 144</span></h3>
+          <p>Cerca elétrica: Vigor –2. Falha = Atordoado.</p>
+          <p>
+            Agarrado à fonte: Vigor –4 cada turno para soltar; falha = 1 Fadiga.
+          </p>
+          <p>Alta voltagem: 4d6 dano (5d6 em água/chuva).</p>
+        </div>
+
+        <div class="card">
+          <h3>Radiação <span class="page-ref">pág. 146</span></h3>
+          <p>Vigor a cada hora (baixa) ou minuto (alta). Falha = 1 Fadiga.</p>
+          <p>Incapacitado = Doença Crônica.</p>
+        </div>
+
+        <div class="card">
+          <h3>Veneno <span class="page-ref">pág. 147</span></h3>
+          <p>Vigor – Força do veneno ao ser afetado.</p>
+          <p>
+            <strong>Letal:</strong> Atordoado + 1 Ferimento (2 se Falha
+            Crítica); morre em 2d6 rodadas.
+          </p>
+          <p><strong>Moderado:</strong> Fadiga (Exaustão se Falha Crítica).</p>
+          <p><strong>Nocauteador:</strong> nocauteado 2d6 horas.</p>
+          <p><strong>Paralisante:</strong> Incapacitado 2d6 minutos.</p>
+          <p>Curar – Força do veneno salva.</p>
+        </div>
+
+        <div class="card">
+          <h3>Doença <span class="page-ref">pág. 143</span></h3>
+          <p><strong>Debilitante:</strong> Fatigado por 2d6 dias.</p>
+          <p>
+            <strong>Crônica:</strong> Vigor a cada sessão. Falha = Exausto;
+            Falha Crítica = morre.
+          </p>
+          <p>
+            <strong>Letal:</strong> Fatigado; a cada turno/hora/dia Vigor ou 1
+            Ferimento.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ WILD CARDS ============ -->
+      <section class="section">
+        <h2>👥 Wild Cards & Extras</h2>
+
+        <div class="card">
+          <h3>Diferenças <span class="page-ref">pág. 101</span></h3>
+          <table>
+            <tr>
+              <th>—</th>
+              <th>Carta Selvagem</th>
+              <th>Extra</th>
+            </tr>
+            <tr>
+              <td>Dado Selvagem</td>
+              <td>Sim (d6)</td>
+              <td>Não</td>
+            </tr>
+            <tr>
+              <td>Ferimentos</td>
+              <td>3</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Curinga dá Bene</td>
+              <td>Sim</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Falha Crítica</td>
+              <td>1+1</td>
+              <td>1 + d6=1</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Quem é o quê? <span class="page-ref">pág. 101</span></h3>
+          <p>
+            <strong>Cartas Selvagens:</strong> jogadores, vilões, monstros
+            únicos.
+          </p>
+          <p>
+            <strong>Extras:</strong> capangas, soldados comuns, animais,
+            lacaios.
+          </p>
+          <p>O Mestre decide quem é Carta Selvagem.</p>
+        </div>
+
+        <div class="card">
+          <h3>Extras e Consequências <span class="page-ref">pág. 113</span></h3>
+          <p>
+            Se for importante saber se um Extra Incapacitado morreu: role Vigor.
+          </p>
+          <p>Sucesso: sobrevive (prisioneiro/ferido). Falha: morto.</p>
+        </div>
+
+        <div class="card">
+          <h3>Aliados dos Jogadores <span class="page-ref">pág. 131</span></h3>
+          <p>
+            Extras aliados são controlados pelos <strong>jogadores</strong>, não
+            pelo Mestre.
+          </p>
+          <p>Cada jogador controla o seu (ou dividem). O Mestre só narra.</p>
+          <p>Perfis: Soldado (pág. 132), Soldado Calejado (pág. 133).</p>
+        </div>
+      </section>
+
+      <!-- ============ PODERES ============ -->
+      <section class="section">
+        <h2>✨ Poderes — Lembretes</h2>
+
+        <div class="card">
+          <h3>Ativação <span class="page-ref">pág. 181</span></h3>
+          <p>
+            Role perícia arcana (Conjurar/Fé/Foco/Psionicos/Ciência Estranha) vs
+            Dif. 4.
+          </p>
+          <p>Falha = gasta 1 Ponto de Poder mesmo assim.</p>
+          <p>
+            Falha Crítica = Choque de Retorno (1 Fadiga + todos poderes
+            encerram).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Manter Poderes <span class="page-ref">pág. 182</span></h3>
+          <p>1 PP para manter pela Duração base. Encerrar = ação livre.</p>
+        </div>
+
+        <div class="card">
+          <h3>Reduzir Custo <span class="page-ref">pág. 182</span></h3>
+          <p>
+            –1 PP por –1 na rolagem de perícia arcana. Falha = Falha Crítica.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Modificadores Comuns <span class="page-ref">pág. 182</span></h3>
+          <ul>
+            <li>
+              <strong>Perfurante de Armadura</strong> (+1 por PA 2, máx PA 6).
+            </li>
+            <li><strong>Arma Pesada</strong> (+2).</li>
+            <li><strong>Dano Persistente</strong> (+2).</li>
+            <li><strong>Seletivo</strong> (+1).</li>
+            <li><strong>Fadiga</strong> (+2).</li>
+            <li><strong>Receptores Adicionais</strong> (+1 por alvo).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Recarga <span class="page-ref">pág. 182</span></h3>
+          <p>
+            5 PP por hora de descanso. Recarga Rápida: 10/h. Aprimorada: 20/h.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Choque de Retorno <span class="page-ref">pág. 182</span></h3>
+          <p>Falha Crítica = 1 Fadiga + todos os poderes ativos encerram.</p>
+          <p>
+            Regra opcional: tabela de Choque de Retorno Dinâmico (pág. 161).
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ REGRAS DE AMBIENTAÇÃO ============ -->
+      <section class="section">
+        <h2>🎛️ Regras de Ambientação</h2>
+
+        <div class="card">
+          <h3>Lista Rápida <span class="page-ref">pág. 168</span></h3>
+          <ul>
+            <li>
+              <strong>Alta Aventura:</strong> Bene para usar Vantagem de Combate
+              uma vez.
+            </li>
+            <li>
+              <strong>Choque de Retorno Dinâmico:</strong> tabela especial em
+              Falha Crítica arcana.
+            </li>
+            <li>
+              <strong>Combate Criativo:</strong> ampliação em Desafio → tabela
+              especial.
+            </li>
+            <li>
+              <strong>Convicção:</strong> marcadores extras por
+              triunfo/tragédia.
+            </li>
+            <li><strong>Cura Rápida:</strong> cura natural 1×/dia.</li>
+            <li>
+              <strong>Dano Severo:</strong> role na Tabela de Lesões ao receber
+              Ferimento.
+            </li>
+            <li>
+              <strong>Escolhas Difíceis:</strong> Benes do Mestre vêm dos
+              jogadores.
+            </li>
+            <li>
+              <strong>Especialização de Perícias:</strong> –2 fora da
+              especialização.
+            </li>
+            <li>
+              <strong>Fanáticos:</strong> capangas recebem dano no lugar do
+              chefe.
+            </li>
+            <li>
+              <strong>Heróis Nunca Morrem:</strong> Falhas Críticas de Vigor
+              viram falhas normais.
+            </li>
+            <li>
+              <strong>Heróis Sem Armadura:</strong> +2 em Absorção sem armadura.
+            </li>
+            <li>
+              <strong>Limite de Ferimentos:</strong> máx 4 Ferimentos por golpe.
+            </li>
+            <li><strong>Mais Pontos de Perícia:</strong> 15 em vez de 12.</li>
+            <li><strong>Múltiplos Idiomas:</strong> todos têm Linguista.</li>
+            <li>
+              <strong>Nasce um Herói:</strong> ignora requisito de Estágio na
+              criação.
+            </li>
+            <li><strong>Pura Sorte:</strong> Bene após Falha Crítica.</li>
+            <li>
+              <strong>Sem Pontos de Poder:</strong> –1/2 custo total na rolagem
+              de perícia arcana.
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- ============ CHECKLIST DE COMBATE ============ -->
+      <section class="section">
+        <h2>🚨 Referência de Combate — Checklist</h2>
+
+        <div class="card">
+          <h3>Início do Combate</h3>
+          <ol>
+            <li>Saque Cartas de Ação (1 por Carta Selvagem/grupo).</li>
+            <li>Jogadores sacando Curinga = todos ganham Bene.</li>
+            <li>Aplique Vantagens tipo Rápido/Focado/Hesitante.</li>
+            <li>Ordem: Curingas → Ás → 2. Empates: ♠&gt;♥&gt;♦&gt;♣.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Turno do Inimigo (Mestre)</h3>
+          <ol>
+            <li>Recuperar Abalado (Espírito, ação livre).</li>
+            <li>Recuperar Atordoado (Vigor, ação livre).</li>
+            <li>Escolher ações (declarar múltiplas antes de rolar).</li>
+            <li>Mover + agir.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Resolução de Ataque</h3>
+          <ol>
+            <li>Role Lutar/Atirar + Dado Selvagem.</li>
+            <li>
+              Aplique penalidades (Distância, Cobertura, Iluminação, etc.).
+            </li>
+            <li>Compare com Aparar (corpo a corpo) ou Dif. 4 (distância).</li>
+            <li>Ampliações → +1d6 dano cada.</li>
+            <li>Role dano (arma + Força se corpo a corpo).</li>
+            <li>Compare com Resistência.</li>
+            <li>Aplique tabela de dano (Abalado/Ferimentos).</li>
+            <li>Alvo pode gastar Bene para Soak.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Fim de Rodada</h3>
+          <ol>
+            <li>Regeneração (se houver).</li>
+            <li>Dano persistente (fogo, ácido, etc.).</li>
+            <li>Sangramento (se aplicável).</li>
+            <li>Efeitos com duração em rodadas.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Lembretes Importantes</h3>
+          <ul>
+            <li>
+              <strong>Falha Crítica:</strong> 1+1 (Carta Selvagem). Não pode
+              rerrolar.
+            </li>
+            <li>
+              <strong>Bene = 1 ação instantânea</strong> para remover Abalado,
+              Soak, rerrolar, sacar carta.
+            </li>
+            <li>
+              <strong>Ampliação no ataque</strong> = +1d6 dano (o dado extra
+              pode gerar Ás).
+            </li>
+            <li>
+              <strong>Incapacitado ≠ morto.</strong> Role Vigor + Tabela de
+              Lesões.
+            </li>
+            <li>
+              <strong>Golpe de Misericórdia</strong> é a única morte certa.
+            </li>
+            <li>
+              <strong>Curinga:</strong> +2 em tudo (rolagens e dano) na rodada.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div id="no-results" class="no-results hidden">
+        🔍 Nenhuma regra encontrada para essa busca.
+      </div>
+    </main>
+
+    <script>
+      const searchInput = document.getElementById("search");
+      const cards = document.querySelectorAll(".card");
+      const sections = document.querySelectorAll(".section");
+      const noResults = document.getElementById("no-results");
+
+      function filter() {
+        const q = searchInput.value.toLowerCase().trim();
+
+        if (!q) {
+          cards.forEach((c) => c.classList.remove("hidden"));
+          sections.forEach((s) => s.classList.remove("hidden"));
+          noResults.classList.add("hidden");
+          return;
+        }
+
+        let totalVisible = 0;
+
+        cards.forEach((card) => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(q)) {
+            card.classList.remove("hidden");
+            totalVisible++;
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+
+        sections.forEach((section) => {
+          const vis = section.querySelectorAll(".card:not(.hidden)");
+          if (vis.length > 0) {
+            section.classList.remove("hidden");
+          } else {
+            section.classList.add("hidden");
+          }
+        });
+
+        if (totalVisible === 0) {
+          noResults.classList.remove("hidden");
+        } else {
+          noResults.classList.add("hidden");
+        }
+      }
+
+      searchInput.addEventListener("input", filter);
+
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        document.body.classList.toggle("light");
+      });
+
+      document.getElementById("print-btn").addEventListener("click", () => {
+        window.print();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        if (e.key === "Escape") {
+          searchInput.value = "";
+          searchInput.blur();
+          filter();
+        }
+      });
+    </script>
+  </body>
+</html>
